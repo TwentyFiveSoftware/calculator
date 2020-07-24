@@ -1,12 +1,22 @@
-const app = new Vue({
+new Vue({
     el: '.calculator',
     data: {
-        input: '1234,5 + 0,5',
-        output: '1235'
+        input: '',
+        output: ''
     },
     methods: {
         clickButton(button) {
-            console.log(button)
+            switch (button) {
+                case 'AC':
+                    this.input = '';
+                    this.output = '';
+                    break;
+                case '=':
+                    this.output = this.input;
+                    break;
+                default:
+                    this.input += button;
+            }
         }
     }
 })
