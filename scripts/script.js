@@ -12,10 +12,22 @@ new Vue({
                     this.output = '';
                     break;
                 case '=':
-                    this.evaluateInput();
+                    if (this.input.length > 0)
+                        this.evaluateInput();
+                    break;
+                case '<-':
+                    if (this.input.length > 0)
+                        this.input = this.input.substr(0, this.input.length - 1);
+
+                    this.output = '';
                     break;
                 default:
                     this.input += button;
+
+                    if (this.output.length > 0) {
+                        this.input = '';
+                        this.output = '';
+                    }
             }
         },
         evaluateInput() {
@@ -42,7 +54,7 @@ new Vue({
 
             this.output = value;
         },
-        handleKeyPress(event) {
+        handleKeyDown(event) {
             if (event.key === 'Enter' || event.key === '=') {
                 this.clickButton('=');
                 return;
@@ -54,12 +66,9 @@ new Vue({
             }
 
             if (event.key.charCodeAt(0) === 66) { // RETURN
-                if (this.input.length > 0)
-                    this.input = this.input.substr(0, this.input.length - 1);
+                this.clickButton('<-');
                 return;
             }
-
-            console.log(event.key.charCodeAt(0))
 
             if (event.key.length > 1) return;
 
@@ -80,6 +89,6 @@ new Vue({
         }
     },
     mounted() {
-        window.addEventListener('keypress', this.handleKeyPress);
+        window.addEventListener('keydown', this.handleKeyDown);
     }
 })
