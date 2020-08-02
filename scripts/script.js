@@ -22,12 +22,13 @@ new Vue({
                     this.output = '';
                     break;
                 default:
-                    this.input += button;
-
                     if (this.output.length > 0) {
                         this.input = '';
                         this.output = '';
                     }
+
+                    this.input += button;
+
             }
         },
         evaluateInput() {
