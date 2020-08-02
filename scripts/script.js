@@ -2,7 +2,6 @@ new Vue({
     el: '.calculator',
     data: {
         input: '',
-        formattedInput: '',
         output: ''
     },
     methods: {
@@ -18,14 +17,6 @@ new Vue({
                 default:
                     this.input += button;
             }
-
-            this.formatInput();
-        },
-        formatInput() {
-            this.formattedInput = this.input
-                .replace(/\//g, '÷')
-                .replace(/\*/g, '×')
-                .replace(/\./g, ',');
         },
         evaluateInput() {
             let result = (new MathExpressionEvaluator(this.input)).parse();
@@ -50,6 +41,14 @@ new Vue({
             value = value.replace(/\./g, ',')
 
             this.output = value;
+        }
+    },
+    computed: {
+        formattedInput() {
+            return this.input
+                .replace(/\//g, '÷')
+                .replace(/\*/g, '×')
+                .replace(/\./g, ',');
         }
     }
 })
