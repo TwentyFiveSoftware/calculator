@@ -41,6 +41,34 @@ new Vue({
             value = value.replace(/\./g, ',')
 
             this.output = value;
+        },
+        handleKeyPress(event) {
+            if (event.key === 'Enter' || event.key === '=') {
+                this.clickButton('=');
+                return;
+            }
+
+            if (event.key.charCodeAt(0) === 68) { // ^
+                this.clickButton('^');
+                return;
+            }
+
+            if (event.key.charCodeAt(0) === 66) { // RETURN
+                if (this.input.length > 0)
+                    this.input = this.input.substr(0, this.input.length - 1);
+                return;
+            }
+
+            console.log(event.key.charCodeAt(0))
+
+            if (event.key.length > 1) return;
+
+            let key = event.key.charCodeAt(0);
+
+            if ((key >= '0'.charCodeAt(0) && key <= '9'.charCodeAt(0)) ||
+                (key >= 'a'.charCodeAt(0) && key <= 'z'.charCodeAt(0)) ||
+                (key >= '('.charCodeAt(0) && key <= '/'.charCodeAt(0)))
+                this.clickButton(event.key.replace(/,/g, '.'));
         }
     },
     computed: {
@@ -50,5 +78,8 @@ new Vue({
                 .replace(/\*/g, '×')
                 .replace(/\./g, ',');
         }
+    },
+    mounted() {
+        window.addEventListener('keypress', this.handleKeyPress);
     }
 })
