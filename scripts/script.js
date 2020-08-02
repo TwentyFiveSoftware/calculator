@@ -60,6 +60,11 @@ new Vue({
                 return;
             }
 
+            if (event.key === 'Escape') {
+                this.clickButton('AC');
+                return;
+            }
+
             if (event.key.charCodeAt(0) === 68) { // ^
                 this.clickButton('^');
                 return;
