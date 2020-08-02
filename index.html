@@ -5,12 +5,13 @@
     <link rel="icon" href="assets/logo.svg">
     <link rel="stylesheet" href="style/style.css">
     <title>Calculator | TwentyFive</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <script src="scripts/lib/vue.js"></script>
 </head>
 <body>
 <div class="calculator">
     <div class="calculator__top">
-        <div class="calculator__input">{{input}}</div>
+        <div class="calculator__input">{{formattedInput}}</div>
         <div class="calculator__output">{{output}}</div>
     </div>
 
@@ -18,11 +19,11 @@
         <div class="calculator__button calculator__button--dark" @click="() => clickButton('AC')">AC</div>
         <div class="calculator__button calculator__button--dark" @click="() => clickButton('(')">(</div>
         <div class="calculator__button calculator__button--dark" @click="() => clickButton(')')">)</div>
-        <div class="calculator__button calculator__button--dark" @click="() => clickButton('÷')">÷</div>
+        <div class="calculator__button calculator__button--dark" @click="() => clickButton('/')">÷</div>
         <div class="calculator__button" @click="() => clickButton('7')">7</div>
         <div class="calculator__button" @click="() => clickButton('8')">8</div>
         <div class="calculator__button" @click="() => clickButton('9')">9</div>
-        <div class="calculator__button calculator__button--dark" @click="() => clickButton('×')">×</div>
+        <div class="calculator__button calculator__button--dark" @click="() => clickButton('*')">×</div>
         <div class="calculator__button" @click="() => clickButton('4')">4</div>
         <div class="calculator__button" @click="() => clickButton('5')">5</div>
         <div class="calculator__button" @click="() => clickButton('6')">6</div>
@@ -33,11 +34,12 @@
         <div class="calculator__button calculator__button--dark" @click="() => clickButton('+')">+</div>
         <div class="calculator__button" @click="() => clickButton('0')">0</div>
         <div class="calculator__button"></div>
-        <div class="calculator__button calculator__button--dark" @click="() => clickButton(',')">,</div>
+        <div class="calculator__button calculator__button--dark" @click="() => clickButton('.')">,</div>
         <div class="calculator__button calculator__button--highlighted" @click="() => clickButton('=')">=</div>
     </div>
 </div>
 
+<script src="scripts/MathExpressionEvaluator.js"></script>
 <script src="scripts/script.js"></script>
 </body>
 </html>

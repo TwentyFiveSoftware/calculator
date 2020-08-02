@@ -2,6 +2,7 @@ new Vue({
     el: '.calculator',
     data: {
         input: '',
+        formattedInput: '',
         output: ''
     },
     methods: {
@@ -12,11 +13,43 @@ new Vue({
                     this.output = '';
                     break;
                 case '=':
-                    this.output = this.input;
+                    this.evaluateInput();
                     break;
                 default:
                     this.input += button;
             }
+
+            this.formatInput();
+        },
+        formatInput() {
+            this.formattedInput = this.input
+                .replace(/\//g, '÷')
+                .replace(/\*/g, '×')
+                .replace(/\./g, ',');
+        },
+        evaluateInput() {
+            let result = (new MathExpressionEvaluator(this.input)).parse();
+
+            if (result.error !== '') {
+                this.output = result.error;
+                return;
+            }
+
+            let value = result.value;
+
+            // CAP OUTPUT TO 5 FRACTION DIGITS
+            let split = value.toString().split('.');
+            if (split.length > 1)
+                if (split[1].length > 5)
+                    value = split[0] + '.' + split[1].substr(0, 5);
+
+            value = Number(value);
+
+            // REPLACE '.' WITH ','
+            value = value.toString();
+            value = value.replace(/\./g, ',')
+
+            this.output = value;
         }
     }
 })
