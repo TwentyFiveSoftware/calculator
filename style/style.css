@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
 :root {
-  --color-background: #E6E9EB;
+  --color-background: #FFFFFF;
   --color-background-calculator: #FFFFFF;
   --color-accent-1: #DF4695;
   --color-accent-2: #F8B62E;
   --color-button-text: #000000;
   --color-button-text-light: #FFFFFF;
-  --color-button-background-dark: #EAEAEA;
+  --color-button-background-dark: #F0F0F0;
   --color-button-background-hover: #FBFBFB;
   --color-button-background-dark-hover: #E0E0E0;
   --color-input: #FFFFFFA0;
@@ -41,7 +41,10 @@ body {
   overflow: hidden;
   display: grid;
   grid-template-rows: 1fr calc(5 * 10rem);
-  box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.2);
+}
+.calculator--extended {
+  width: 70rem;
 }
 .calculator__top {
   background: linear-gradient(45deg, var(--color-accent-1), var(--color-accent-2));
@@ -61,6 +64,9 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 10rem);
   grid-template-rows: repeat(5, 10rem);
+}
+.calculator__bottom--extended {
+  grid-template-columns: repeat(7, 10rem);
 }
 .calculator__button {
   display: grid;
