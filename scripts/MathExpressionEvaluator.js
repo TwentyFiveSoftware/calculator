@@ -102,11 +102,11 @@ class MathExpressionEvaluator {
                 x = Math.cos(this.toRadians(x));
             else if (func === 'tan')
                 x = Math.tan(this.toRadians(x));
-            else if (func === 'arcsin')
+            else if (func === 'asin')
                 x = this.toDegree(Math.asin(x));
-            else if (func === 'arccos')
+            else if (func === 'acos')
                 x = this.toDegree(Math.acos(x));
-            else if (func === 'arctan')
+            else if (func === 'atan')
                 x = this.toDegree(Math.atan(x));
             else if (func === 'sqrt')
                 x = Math.sqrt(x);
