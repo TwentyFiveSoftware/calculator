@@ -68,6 +68,11 @@ new Vue({
                 return;
             }
 
+            if (event.key === '|') {
+                this.clickButton('|');
+                return;
+            }
+
             if (event.key.charCodeAt(0) === 66) { // RETURN
                 this.clickButton('<-');
                 return;
