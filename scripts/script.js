@@ -41,11 +41,8 @@ new Vue({
 
             let value = result.value;
 
-            // CAP OUTPUT TO 5 FRACTION DIGITS
-            let split = value.toString().split('.');
-            if (split.length > 1)
-                if (split[1].length > 5)
-                    value = split[0] + '.' + split[1].substr(0, 5);
+            if(value.toString().length > 10)
+                value = Number(value).toFixed(10);
 
             value = Number(value);
 
