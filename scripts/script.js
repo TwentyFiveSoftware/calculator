@@ -2,7 +2,8 @@ new Vue({
     el: '.calculator',
     data: {
         input: '',
-        output: ''
+        output: '',
+        lastAnswer: 0
     },
     methods: {
         clickButton(button) {
@@ -32,7 +33,7 @@ new Vue({
             }
         },
         evaluateInput() {
-            let result = (new MathExpressionEvaluator(this.input)).parse();
+            let result = (new MathExpressionEvaluator(this.input, this.lastAnswer)).parse();
 
             if (result.error !== '') {
                 this.output = result.error;
@@ -45,6 +46,7 @@ new Vue({
                 value = Number(value).toFixed(10);
 
             value = Number(value);
+            this.lastAnswer = value;
 
             // REPLACE '.' WITH ','
             value = value.toString();

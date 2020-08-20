@@ -3,12 +3,13 @@
 // GRAMMAR:
 // expression = term | expression '+' term | expression '-' term
 // term       = factor | term '*' factor | term '/' factor
-// factor     = number | π | e | '-' factor | '+' factor | factor '^' factor | '(' expression ')' | <func> factor | '|' expresion '|'
+// factor     = number | π | e | '-' factor | '+' factor | factor '^' factor | '(' expression ')' | <func> factor | '|' expresion '|' | ANS
 
 class MathExpressionEvaluator {
 
-    constructor(input) {
+    constructor(input, lastAnswer) {
         this.input = input;
+        this.lastAnswer = lastAnswer;
 
         this.currentChar = -1
         this.currentPos = -1;
@@ -99,34 +100,41 @@ class MathExpressionEvaluator {
 
             x = Number(this.input.substring(startPos, this.currentPos));
 
-        } else if ((this.currentChar >= 'a'.charCodeAt(0) && this.currentChar <= 'z'.charCodeAt(0))) {
-            while ((this.currentChar >= 'a'.charCodeAt(0) && this.currentChar <= 'z'.charCodeAt(0)))
+        } else if ((this.currentChar >= 'A'.charCodeAt(0) && this.currentChar <= 'Z'.charCodeAt(0)) ||
+            (this.currentChar >= 'a'.charCodeAt(0) && this.currentChar <= 'z'.charCodeAt(0))) {
+
+            while ((this.currentChar >= 'A'.charCodeAt(0) && this.currentChar <= 'Z'.charCodeAt(0)) ||
+            (this.currentChar >= 'a'.charCodeAt(0) && this.currentChar <= 'z'.charCodeAt(0)))
                 this.nextChar();
 
             let func = this.input.substring(startPos, this.currentPos);
-            x = this.parseFactor();
 
-            if (func === 'sin')
-                x = Math.sin(this.toRadians(x));
-            else if (func === 'cos')
-                x = Math.cos(this.toRadians(x));
-            else if (func === 'tan')
-                x = Math.tan(this.toRadians(x));
-            else if (func === 'asin')
-                x = this.toDegree(Math.asin(x));
-            else if (func === 'acos')
-                x = this.toDegree(Math.acos(x));
-            else if (func === 'atan')
-                x = this.toDegree(Math.atan(x));
-            else if (func === 'sqrt')
-                x = Math.sqrt(x);
-            else if (func === 'log')
-                x = Math.log10(x);
-            else if (func === 'ln')
-                x = Math.log(x);
-            else
-                this.error = 'Unknown function: ' + func;
+            if (func === 'ANS')
+                x = this.lastAnswer;
+            else {
+                x = this.parseFactor();
 
+                if (func === 'sin')
+                    x = Math.sin(this.toRadians(x));
+                else if (func === 'cos')
+                    x = Math.cos(this.toRadians(x));
+                else if (func === 'tan')
+                    x = Math.tan(this.toRadians(x));
+                else if (func === 'asin')
+                    x = this.toDegree(Math.asin(x));
+                else if (func === 'acos')
+                    x = this.toDegree(Math.acos(x));
+                else if (func === 'atan')
+                    x = this.toDegree(Math.atan(x));
+                else if (func === 'sqrt')
+                    x = Math.sqrt(x);
+                else if (func === 'log')
+                    x = Math.log10(x);
+                else if (func === 'ln')
+                    x = Math.log(x);
+                else
+                    this.error = 'Unknown function: ' + func;
+            }
         } else
             this.error = 'Unexpected: ' + String.fromCharCode(this.currentChar);
 
