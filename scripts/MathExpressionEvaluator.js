@@ -3,7 +3,7 @@
 // GRAMMAR:
 // expression = term | expression '+' term | expression '-' term
 // term       = factor | term '*' factor | term '/' factor
-// factor     = number | '-' factor | '+' factor | factor '^' factor | '(' expression ')' | <func> factor
+// factor     = number | π | e | '-' factor | '+' factor | factor '^' factor | '(' expression ')' | <func> factor
 
 class MathExpressionEvaluator {
 
@@ -82,6 +82,12 @@ class MathExpressionEvaluator {
         if (this.consumeIfMatch('(')) {
             x = this.parseExpression()
             this.consumeIfMatch(')')
+
+        } else if (this.consumeIfMatch('π')) {
+            x = Math.PI;
+
+        } else if (this.consumeIfMatch('e')) {
+            x = Math.E;
 
         } else if ((this.currentChar >= '0'.charCodeAt(0) && this.currentChar <= '9'.charCodeAt(0)) || this.currentChar === '.'.charCodeAt(0)) {
             while ((this.currentChar >= '0'.charCodeAt(0) && this.currentChar <= '9'.charCodeAt(0)) || this.currentChar === '.'.charCodeAt(0))
