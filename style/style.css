@@ -91,4 +91,28 @@ body {
   color: var(--color-button-text-light);
 }
 
+.sidebar {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+.sidebar__button {
+  display: grid;
+  place-items: center;
+  margin: 1.5rem 0 0 2rem;
+  background: linear-gradient(45deg, var(--color-accent-1), var(--color-accent-2));
+  padding: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.2);
+}
+.sidebar__button img {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-button-text-light);
+}
+
 /*# sourceMappingURL=style.css.map */
