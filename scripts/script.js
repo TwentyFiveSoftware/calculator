@@ -1,9 +1,10 @@
 new Vue({
-    el: '.calculator',
+    el: '#app',
     data: {
         input: '',
         output: '',
-        lastAnswer: 0
+        lastAnswer: 0,
+        advanced: false
     },
     methods: {
         clickButton(button) {
