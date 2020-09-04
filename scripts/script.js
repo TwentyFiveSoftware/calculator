@@ -25,8 +25,12 @@ new Vue({
                     break;
                 default:
                     if (this.output.length > 0) {
-                        this.input = '';
                         this.output = '';
+
+                        if (['+', '-', '*', '/', '^'].indexOf(button) !== -1)
+                            this.input = 'ANS';
+                        else
+                            this.input = '';
                     }
 
                     this.input += button;
@@ -43,7 +47,7 @@ new Vue({
 
             let value = result.value;
 
-            if(value.toString().length > 10)
+            if (value.toString().length > 10)
                 value = Number(value).toFixed(10);
 
             value = Number(value);
